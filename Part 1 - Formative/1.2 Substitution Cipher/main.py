@@ -25,4 +25,4 @@ enc = sub_encode(test, cipher_alphabet)
 dec = sub_decode(enc, cipher_alphabet)
 print(enc)
 print(dec)
-# If this worked, dec should be the same as test!
+# If this worked, dec should be the same as test!=

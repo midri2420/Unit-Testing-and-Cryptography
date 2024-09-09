@@ -8,4 +8,4 @@ class MyTestCase(TestCase):
     def test_caesar_encode_uppercase(self):
         self.assertEqual(caesar_encode("HELLOWORLD", 5), "MJQQTBTWQI")  # add assertion here
     def test_caesar_encode_lowercase(self):
-        self.assertEqual(caesar_encode("helloworld", 5), "mjqqtbtwqi")
+        self.assertEqual(caesar_encode("helloworld", 5), "MJQQTBTWQI")

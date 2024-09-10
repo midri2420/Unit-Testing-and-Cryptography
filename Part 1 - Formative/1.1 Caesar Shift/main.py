@@ -6,7 +6,7 @@ alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 def caesar_encode(text, n):
     new_word = ""
     for letter in text:
-        index = alpha.index(letter)
+        index = alpha.index(letter.upper())
         new_word += (alpha[(index + n) % 26]).upper()
     return new_word
 
@@ -14,7 +14,7 @@ def caesar_encode(text, n):
 def caesar_decode(text, n):
     new_word = ""
     for letter in text:
-        index = alpha.index(letter)
+        index = alpha.index(letter.upper())
         new_word += (alpha[(index - n) % 26]).upper()
     return new_word
 

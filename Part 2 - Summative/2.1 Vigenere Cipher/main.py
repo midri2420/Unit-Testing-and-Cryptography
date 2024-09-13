@@ -22,3 +22,4 @@ dec = vig_decode(enc, vig_key)
 print(enc)
 print(dec)
 # If this worked, dec should be the same as test!
+changes

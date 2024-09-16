@@ -20,10 +20,18 @@ def mod_inverse(a, m):
 
 # These are the functions you'll need to write:
 def affine_encode(text, a, b):
-    return ''
+    new_word = ""
+    for i in range(len(text)):
+        new_word += alpha[((((alpha.index(text[i])) * a) % 26) + b) % 26]
+    return new_word
 
 def affine_decode(text, a, b):
-    return ''
+    new_word = ""
+    for i in range(len(text)):
+        new_word += alpha[((alpha.index(text[i]) - b) * mod_inverse(a, 26)) % 26]
+    return new_word
+
+# new_word += alpha[((alpha.index(text[i])) * mod_inverse(a, 26)) % 26]
 
 test = "HELLOWORLD"
 a = 3
@@ -39,10 +47,17 @@ print(dec)
 # PART 2
 # These  are the functions you'll need to write:
 def convert_to_num(ngram):
-    return 0
+    num = 0
+    for i in range(len(ngram)):
+        num += alpha.index(ngram[i]) * (26 ** i)
+    return num
 
 def convert_to_text(num, n):
-    return ''
+    new_word = ""
+    while ((num / 26) % 26) != 0:
+
+
+    return new_word
 
 test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
 l = len(test)

@@ -54,9 +54,10 @@ def convert_to_num(ngram):
 
 def convert_to_text(num, n):
     new_word = ""
-    while ((num / 26) % 26) != 0:
-
-
+    new_word += alpha[(num % 26)]
+    while num // 26 != 0:
+        num = num // 26
+        new_word += alpha[(num % 26)]
     return new_word
 
 test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
@@ -73,16 +74,26 @@ print(answer)
 
 # These are the functions you'll need to write:
 def affine_n_encode(text, n, a, b):
-    return ''
+    new_word = ""
+    x = convert_to_num(text)
+    numX =  len(text) % n
+    ngram_length = (len(text) + numX) / n
+    for i in range(n):
+        for j in range(ngram_length):
+            newletterindex = (((a * x) + b) % (26 ** n))
+            print(newletterindex)
+            new_word += alpha[newletterindex]
+    return new_word
 
 def affine_n_decode(text, n, a, b):
     return ''
 
-test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
-n = 5
-a = 347
-b = 1721
-enc = affine_n_encode(test, n, a, b)
-dec = affine_n_decode(enc, n, a, b)
-print(enc, dec)
+# test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
+# n = 5
+# a = 347
+# b = 1721
+# enc = affine_n_encode(test, n, a, b)
+# dec = affine_n_decode(enc, n, a, b)
+# print(enc, dec)
+print(affine_n_encode("COOL", 2, 3, 121))
 # If this worked, dec should be the same as test!

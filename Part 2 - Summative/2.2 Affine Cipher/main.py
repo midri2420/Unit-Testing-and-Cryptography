@@ -77,13 +77,15 @@ def affine_n_encode(text, n, a, b):
     new_word = ""
     x = convert_to_num(text)
     numX =  len(text) % n
-    ngram_length = (len(text) + numX) / n
+    ngram_length = int((len(text) + numX) / n)
     for i in range(n):
-        for j in range(ngram_length):
-            newletterindex = (((a * x) + b) % (26 ** n))
-            print(newletterindex)
-            new_word += alpha[newletterindex]
-    return new_word
+        first_index = i * ngram_length
+        slicedngram = text[first_index: first_index + ngram_length]
+        for i in range(ngram_length):
+            x = convert_to_num(slicedngram)
+            newindex = (((a * x) + b) % (26 ** n))
+            new_word += convert_to_text(newindex)
+        return new_word
 
 def affine_n_decode(text, n, a, b):
     return ''

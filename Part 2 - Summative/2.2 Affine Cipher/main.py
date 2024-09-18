@@ -97,20 +97,20 @@ def affine_n_encode(text, n, a, b):
 
 
 def affine_n_decode(text, n, a, b):
-    # new_word = ""
-    # x = convert_to_num(text)
-    # if len(text) % n != 0:
-    #     numX = n - (len(text) % n)
-    # else:
-    #     numX = 0
-    # num_ngram = int((len(text) + numX) / n)
-    # for i in range(num_ngram):
-    #     first_index = i * n
-    #     slicedngram = text[first_index: first_index + n]
-    #     for i in range(num_ngram):
-    #         x = convert_to_num(slicedngram)
-    #         newindex = ((x - b) % (mod_inverse(a, 26)))
-    #     new_word += convert_to_text(newindex)
+    new_word = ""
+    x = convert_to_num(text)
+    if len(text) % n != 0:
+        numX = n - (len(text) % n)
+    else:
+        numX = 0
+    num_ngram = int((len(text) + numX) / n)
+    for i in range(num_ngram):
+        first_index = i * n
+        slicedngram = text[first_index: first_index + n]
+        for i in range(num_ngram):
+            x = convert_to_num(slicedngram)
+            newindex = ((x - b) % (mod_inverse(a, 26)))
+        new_word += convert_to_text(newindex)
     return ''
 
 

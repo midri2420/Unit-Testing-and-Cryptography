@@ -72,6 +72,8 @@ def convert_to_text(num):
         num = num // 26
         new_word += alpha[(num % 26)]
     return new_word
+print(convert_to_num("OXXX"))
+print(convert_to_text(98))
 
 # test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
 # l = len(test)
@@ -115,12 +117,12 @@ def affine_n_decode(text, n, a, b):
         new_word += convert_to_text(newindex)
     return new_word
 
-# test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
-# n = 5
-# a = 347
-# b = 1721
-# enc = affine_n_encode(test, n, a, b)
-# dec = affine_n_decode(enc, n, a, b)
-# print(enc, dec)
+test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
+n = 5
+a = 347
+b = 1721
+enc = affine_n_encode(test, n, a, b)
+dec = affine_n_decode(enc, n, a, b)
+print(enc, dec)
 print(affine_n_encode("COOL", 3, 3, 121))
 # If this worked, dec should be the same as test!

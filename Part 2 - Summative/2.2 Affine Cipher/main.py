@@ -21,26 +21,34 @@ def mod_inverse(a, m):
 # These are the functions you'll need to write:
 def affine_encode(text, a, b):
     new_word = ""
+    if len(text) == 0:
+        return new_word
+    elif a == 0:
+        return new_word
+    elif b == 0:
+        return new_word
+    text = text.upper()
     for i in range(len(text)):
         new_word += alpha[((((alpha.index(text[i])) * a) % 26) + b) % 26]
     return new_word
 
 def affine_decode(text, a, b):
     new_word = ""
+    if len(text) == 0:
+        return new_word
+    text = text.upper()
     for i in range(len(text)):
         new_word += alpha[((alpha.index(text[i]) - b) * mod_inverse(a, 26)) % 26]
     return new_word
 
-# new_word += alpha[((alpha.index(text[i])) * mod_inverse(a, 26)) % 26]
-
 # test = "HELLOWORLD"
-# a = 3
+# a = 5
 # b = 9
 # enc = affine_encode(test, a, b)
 # dec = affine_decode(enc, a, b)
 # print(enc)
 # print(dec)
-# If this worked, dec should be the same as test!
+# # If this worked, dec should be the same as test!
 
 
 
@@ -48,12 +56,17 @@ def affine_decode(text, a, b):
 # These  are the functions you'll need to write:
 def convert_to_num(ngram):
     num = 0
+    if len(ngram) == 0:
+        return num
+    ngram = ngram.upper()
     for i in range(len(ngram)):
         num += alpha.index(ngram[i]) * (26 ** i)
     return num
 
 def convert_to_text(num):
     new_word = ""
+    if num == 0:
+        return new_word
     new_word += alpha[(num % 26)]
     while num // 26 != 0:
         num = num // 26
@@ -66,7 +79,7 @@ def convert_to_text(num):
 # answer = convert_to_text(num)
 # print(num)
 # print(answer)
-# If this worked, answer should be the same as test!
+# # If this worked, answer should be the same as test!
 
 
 
@@ -75,18 +88,16 @@ def convert_to_text(num):
 # These are the functions you'll need to write:
 def affine_n_encode(text, n, a, b):
     new_word = ""
-    if len(text) % n != 0:
-        text += "X" * (n - len(text) % n)
-    print(text)
+    if len(text) // n != 0:
+        text += "X" * (n - (len(text) % n))
     num_ngram = int((len(text) / n))
     for i in range(num_ngram):
         first_index = i * n
-
         slicedngram = text[first_index: first_index + n]
-        print(slicedngram)
+        if len(slicedngram) != n:
+            slicedngram += "X" * (n - len(slicedngram))
         x = convert_to_num(slicedngram)
         newindex = (((a * x) + b) % (26 ** n))
-        print(len(new_word))
         new_word += convert_to_text(newindex)
     return new_word
 
@@ -104,12 +115,12 @@ def affine_n_decode(text, n, a, b):
         new_word += convert_to_text(newindex)
     return new_word
 
-test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
-n = 5
-a = 347
-b = 1721
-enc = affine_n_encode(test, n, a, b)
-dec = affine_n_decode(enc, n, a, b)
-print(enc, dec)
-# print(affine_n_encode("COOL", 3, 3, 121))
+# test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
+# n = 5
+# a = 347
+# b = 1721
+# enc = affine_n_encode(test, n, a, b)
+# dec = affine_n_decode(enc, n, a, b)
+# print(enc, dec)
+print(affine_n_encode("COOL", 3, 3, 121))
 # If this worked, dec should be the same as test!

@@ -4,8 +4,8 @@ alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def vig_encode(text, keyword):
   new_word = ""
-  text.upper()
-  keyword.upper()
+  text = text.upper()
+  keyword = keyword.upper()
   if len(keyword) ==  0:
     return new_word
   for i in range(len(text)):
@@ -15,8 +15,12 @@ def vig_encode(text, keyword):
 
 def vig_decode(text, keyword):
   new_word = ''
-  text.upper()
-  keyword.upper()
+  text = text.upper()
+  keyword = keyword.upper()
+  if len(keyword) ==  0:
+    return new_word
+  if len(keyword) == 0:
+    return new_word
   for i in range(len(text)):
     new_word += alpha[(alpha.index(text[i]) - alpha.index(keyword[i % len(keyword)])) % 26]
   return new_word

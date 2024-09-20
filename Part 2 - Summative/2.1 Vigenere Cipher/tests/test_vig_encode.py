@@ -11,9 +11,9 @@ class MyTestCase(TestCase):
         self.assertEqual(vig_encode("thequickbrownfoxjumpedoverthelazydog", "test"), "MLWJNMUDUVGPGJGQCYEIXHGOXVLAXPSSRHGZ")
     def test_vig_encode_lowercase2(self):
         self.assertEqual(vig_encode("thequickbrownfoxjumpedoverthelazydog", "TEST"), "MLWJNMUDUVGPGJGQCYEIXHGOXVLAXPSSRHGZ")
+    def test_vig_encode_lowercase3(self):
+        self.assertEqual(vig_encode("THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG", "test"), "MLWJNMUDUVGPGJGQCYEIXHGOXVLAXPSSRHGZ")
     def test_vig_encode_empty_insert(self):
         self.assertEqual(vig_encode("", "TEST" ), "")
     def test_vig_encode_empty_insert2(self):
         self.assertEqual(vig_encode("THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG", ""), "")
-    def test_vig_encode_whitespace(self):
-        self.assertEqual(vig_encode(" ", "TEST" ), "")

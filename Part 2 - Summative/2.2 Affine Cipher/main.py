@@ -90,8 +90,6 @@ def affine_n_encode(text, n, a, b):
     new_word = ""
     if len(text) // n != 0:
         text += "X" * (n - (len(text) % n))
-
-    print(len(text))
     num_ngram = len(text) // n
     for i in range(num_ngram):
         first_index = i * n
@@ -99,7 +97,6 @@ def affine_n_encode(text, n, a, b):
         x = convert_to_num(slicedngram)
         print(convert_to_text((((a * x) + b) % (26 ** n))))
         new_word += convert_to_text((((a * x) + b) % (26 ** n)))
-    print(len(new_word))
     return new_word
 
 
@@ -126,7 +123,3 @@ print(enc, dec)
 print(affine_n_encode("COOL", 3, 3, 121))
 # If this worked, dec should be the same as test!
 
-
-print(convert_to_num("RTHEL"))
-# RTHEL IN NUMBER FORM IS 5102283
-print(convert_to_text((((347 * 5102283) + 1721) % (26 ** 5))))

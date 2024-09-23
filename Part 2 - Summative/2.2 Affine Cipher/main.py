@@ -72,8 +72,6 @@ def convert_to_text(num):
         num = num // 26
         new_word += alpha[(num % 26)]
     return new_word
-print(convert_to_num("OXXX"))
-print(convert_to_text(98))
 
 # test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
 # l = len(test)
@@ -92,16 +90,18 @@ def affine_n_encode(text, n, a, b):
     new_word = ""
     if len(text) // n != 0:
         text += "X" * (n - (len(text) % n))
-    num_ngram = int((len(text) / n))
+
+    print(len(text))
+    num_ngram = len(text) // n
     for i in range(num_ngram):
         first_index = i * n
         slicedngram = text[first_index: first_index + n]
-        if len(slicedngram) != n:
-            slicedngram += "X" * (n - len(slicedngram))
         x = convert_to_num(slicedngram)
-        newindex = (((a * x) + b) % (26 ** n))
-        new_word += convert_to_text(newindex)
+        print(convert_to_text((((a * x) + b) % (26 ** n))))
+        new_word += convert_to_text((((a * x) + b) % (26 ** n)))
+    print(len(new_word))
     return new_word
+
 
 def affine_n_decode(text, n, a, b):
     new_word = ""
@@ -109,20 +109,24 @@ def affine_n_decode(text, n, a, b):
     for i in range(num_ngram):
         first_index = i * n
         slicedngram = text[first_index: first_index + n]
-        if len(slicedngram) != n:
-            slicedngram += "X" * (n - len(slicedngram))
         for j in range(len(slicedngram)):
             x = convert_to_num(slicedngram)
-            newindex = ((x - b) * mod_inverse(a, 26 ** n)) % (26 ** j)
+            newindex = ((x - b) * mod_inverse(a, 26 ** n)) % (26 ** n)
         new_word += convert_to_text(newindex)
     return new_word
 
+
 test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
 n = 5
-a = 347
+a = 3#347
 b = 1721
 enc = affine_n_encode(test, n, a, b)
 dec = affine_n_decode(enc, n, a, b)
 print(enc, dec)
 print(affine_n_encode("COOL", 3, 3, 121))
 # If this worked, dec should be the same as test!
+
+
+print(convert_to_num("RTHEL"))
+# RTHEL IN NUMBER FORM IS 5102283
+print(convert_to_text((((347 * 5102283) + 1721) % (26 ** 5))))

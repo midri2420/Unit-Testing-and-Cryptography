@@ -63,6 +63,7 @@ q = 307125506157764866722739041634199200019
 e = 65537
 m = p * q
 d = get_d(p, q, e)
+print(d)
 enc = rsa_encode(text, m, e)
 dec = rsa_decode(enc, m, d, l)
 print(enc)
@@ -72,13 +73,13 @@ print(dec)
 
 # Part 2: Generate your own key!
 
-from sympy import nextprime
-from random import randint
-
-def make_prime(n):
-  lower = 2 ** (n - 1) + 1
-  upper = 2 ** n - 1
-  temp = randint(lower, upper)
-  return nextprime(temp)
-
-make_prime(512)
+# from sympy import nextprime
+# from random import randint
+#
+# def make_prime(n):
+#   lower = 2 ** (n - 1) + 1
+#   upper = 2 ** n - 1
+#   temp = randint(lower, upper)
+#   return nextprime(temp)
+#
+# make_prime(512)

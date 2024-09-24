@@ -55,6 +55,11 @@ def affine_decode(text, a, b):
 # PART 2
 # These  are the functions you'll need to write:
 def convert_to_num(ngram):
+    """
+    ngram is text
+    converts a piece of text into a number by multiplying it by
+    26 ^ (index of letter), then sums it all.
+    """
     num = 0
     if len(ngram) == 0:
         return num
@@ -64,6 +69,12 @@ def convert_to_num(ngram):
     return num
 
 def convert_to_text(num):
+    """
+    num is an ngram in numerical form
+    converts a number back to a piece of text by floor dividing it by 26
+    and then modding by 26 to find the remainder and using that as the new index,
+    it goes until the floor division is == 0 meaning there is no remainder
+    """
     new_word = ""
     if num == 0:
         return new_word
@@ -87,6 +98,12 @@ def convert_to_text(num):
 
 # These are the functions you'll need to write:
 def affine_n_encode(text, n, a, b):
+    """
+    encodes a piece of text by slicing the tet into segments the length of n, and
+    adding X's if not evenly divisible, then multiplies each n-gram in numerical
+    representation by calling convert_to_num() by a, and adding b to it. then mods
+    by 26 ^ n and converts back from a number to text using convert_to_text()
+    """
     new_word = ""
     if len(text) // n != 0:
         text += "X" * (n - (len(text) % n))
@@ -95,12 +112,15 @@ def affine_n_encode(text, n, a, b):
         first_index = i * n
         slicedngram = text[first_index: first_index + n]
         x = convert_to_num(slicedngram)
-        print(convert_to_text((((a * x) + b) % (26 ** n))))
         new_word += convert_to_text((((a * x) + b) % (26 ** n)))
     return new_word
 
 
 def affine_n_decode(text, n, a, b):
+    """
+    does a decode based on the above algorithm but in reverse, n, a, b are
+    still the same
+    """
     new_word = ""
     num_ngram = int((len(text) / n))
     for i in range(num_ngram):
@@ -120,6 +140,6 @@ b = 1721
 enc = affine_n_encode(test, n, a, b)
 dec = affine_n_decode(enc, n, a, b)
 print(enc, dec)
-print(affine_n_encode("COOL", 3, 3, 121))
+print(affine_n_encode("HELLO", 3, 3, 121))
 # If this worked, dec should be the same as test!
 
